@@ -1,0 +1,21 @@
+name: Enviar notificación a ntfy.sh
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Enviar notificación a ntfy.sh
+        run: |
+          curl -H "Title: Nuevo push en main" \
+               -H "Priority: 3" \
+               -d "Se subió código al repositorio principal desde GitHub Actions" \
+               https://ntfy.sh/devops-itla
